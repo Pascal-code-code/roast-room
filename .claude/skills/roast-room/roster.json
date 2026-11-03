@@ -1,5 +1,5 @@
 {
-  "board": "ask",
+  "board": "auto",
   "default": ["bezos", "graham", "hormozi", "garyvee", "martell", "wickman", "buffett"],
   "seats": [
     { "key": "bezos", "name": "Jeff Bezos", "short": "Bezos", "initials": "JB", "slug": "jeff-bezos", "pillar": "Strategy and decisions", "question": "Is this the right bet, and how reversible is it?", "dimension": "Strategic fit and reversibility", "color": "#e8a33d" },

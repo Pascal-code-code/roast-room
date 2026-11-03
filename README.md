@@ -1,3 +1,53 @@
+# Roast Room auf Deutsch
+
+Das ist meine Fassung vom [Roast Room von Nate Herk](https://github.com/nateherkai/roast-room) (MIT-Lizenz). Die Berater sind dieselben, aber ich habe ein paar Sachen angepasst:
+
+- Alle Antworten, Karten und Berichte kommen auf Deutsch.
+- Der Raum sucht sich die passenden Berater selbst aus und fragt dich nicht erst.
+- Die Berater laufen als eigene Sonnet-Agents, damit sie unabhängig voneinander urteilen.
+- Am Ende bekommst du eine klare Entscheidung, den stärksten Einwand und den kleinsten Test für die nächsten 48 Stunden.
+
+## Was du brauchst
+
+- [Claude Code](https://claude.com/claude-code). Dein Claude-Abo reicht, du brauchst keinen API-Key.
+- [Node.js](https://nodejs.org) ab Version 20 und git.
+
+## Einrichten
+
+Am besten richtest du den Roast Room in deinem persönlichen Assistenten ein, also in dem Claude-Code-Projekt, das schon viel über dich und dein Angebot weiß. Dann musst du im Interview weniger erklären. Ein leerer Ordner geht aber auch.
+
+Öffne Claude Code in diesem Projekt und gib ihm diesen Prompt:
+
+```
+Richte mir den Roast Room ein: github.com/Pascal-code-code/roast-room.
+Prüf zuerst, ob Node 20+ und git installiert sind.
+Klon das Repo nach tools/roast-room in diesem Projekt und kopier den
+Ordner .claude/skills/roast-room und alle Dateien aus .claude/agents
+in die .claude/ dieses Projekts, damit ich /roast-room hier nutzen kann.
+Sag mir am Ende in zwei Sätzen, was installiert ist.
+```
+
+Danach Claude Code einmal neu starten, damit es die Berater kennt.
+
+## Eine Idee roasten
+
+```
+Ich überlege, [DEINE IDEE ODER ENTSCHEIDUNG].
+Bevor du den Roast Room startest, interview mich kurz: höchstens fünf
+Fragen, eine nach der anderen. Was du aus diesem Projekt schon über mich
+und mein Angebot weißt, fragst du nicht nochmal.
+Danach: Starte den Roast Room im Hintergrund, öffne
+http://localhost:4730 im Browser und starte /roast-room --quick mit dem Brief.
+Am Ende will ich eine klare Entscheidung: machen, nicht machen oder
+erst testen, und den kleinsten Test für die nächsten 48 Stunden.
+```
+
+`--quick` setzt vier Berater an den Tisch und spart Tokens. Ohne `--quick` sitzen fünf bis sieben Berater drei Runden lang zusammen. Das sind ungefähr 21 Agent-Läufe und kann mit dem Pro-Abo ins Limit laufen. Für große Entscheidungen lohnt es sich trotzdem.
+
+Den ganzen Bericht findest du danach in `tools/roast-room/sessions/`, als PDF über „Download PDF“ im Raum.
+
+---
+
 # Roast Room
 
 ![The Roast Room](docs/room.jpg)

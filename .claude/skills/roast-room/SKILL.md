@@ -1,8 +1,21 @@
 ---
 name: roast-room
-description: Use when a founder wants a hard business decision debated by a council of world-class operators, says "roast room", "put this in the Roast Room", "founder council", "convene the council", "take this to the board", "what would Hormozi, Bezos, or Buffett say", "should I do X", or can't make up their mind on pricing, hiring, raising money, a new product, a partnership, a pivot, an event, or spending. A board of sub-agents, each built from one expert's public work (Bezos, Paul Graham, Hormozi, Gary Vaynerchuk, Dan Martell, Gino Wickman, and Buffett out of the box, plus any seat added with /newroaster), argue it over three rounds, then a Chair returns a scored verdict, the reasoning, the dissent, and next steps. Also does a one-seat consult ("ask the Hormozi seat"). Not /roast (generic personas, idea validation).
-argument-hint: "[the decision] [--quick] [--all] [--seats hormozi,buffett,...] | ask <seat> [question] | board"
+description: Prüft Ideen, Angebote, Kurse und Geschäftsentscheidungen in einem Roast Room aus unabhängigen Beratern. Nutze bei ausdrücklich gewünschtem Roast, Ideenrat oder kritischer Geschäftsprüfung. Drei Debattenrunden liefern gewichtete Optionen, Gegenargumente und den kleinsten Praxistest; optional im lokalen visuellen Raum. Unterstützt einzelne Berater und Board-Verwaltung.
 ---
+
+## Local integration (takes precedence over upstream defaults)
+
+- Repo root: the folder the Roast Room was cloned into. Installed into another project (recommended: your personal assistant project), that is `tools/roast-room` inside it; run directly in the clone, it is the current folder. Resolve all repo-relative paths there, including agent profiles, brains and sessions. The caller's working project supplies the business context.
+- Answer in German, including cards and reports. Keep the parser field labels, stance/vote enums, and verdict JSON labels in English exactly as documented.
+- Pick relevant seats automatically (`board: auto`); announce the selection. Ask only for missing facts that block the requested decision. Unknown pricing, revenue or time budgets stay unknown; use labeled scenarios, never fabricated facts or a financial verdict without the inputs.
+- Use independent Sonnet agents unless the user explicitly authorizes another model. In Claude Code explicitly set `model: sonnet`. If the host agent tool does not offer Sonnet, use the installed Claude CLI with `--model sonnet`; `scripts/run_cli_round.py` supplies isolated, tool-free seats with the selected brains and session context, at most three in parallel. If Sonnet is unavailable, report the concrete failure and ask once before changing model; an authorized override persists for that task. Never silently claim a sequential role-play was independent agents.
+- Read the user's current canonical artifact and latest decisions. Separate verified facts, simulated buyer reactions, assumptions, and tests. A familiar expert's perspective is not customer validation; its score is not a success probability.
+- Preserve the old roast's useful output: German decision, strongest objection, concrete opportunity costs, and the smallest useful 48-hour test. Do not manufacture prices or promise a test validates retention within 48 hours.
+- When the decision concerns an existing plan, offer or course, present concrete proposed changes in chat and verify them together before modifying it. “Possibly refine afterwards” is not approval to insert recommendations, even as drafts; wait for explicit approval of the changes.
+- A critique does not authorize sending messages, publishing, or changing commercial terms. When refinement is requested, use the existing canonical artifact and preserve settled user choices unless the user changes them. Mark substantive new strategy as a proposal.
+- Run the local viewer with `npm start` here. It binds to loopback. Do not enable the optional API runner or add credentials for a CLI roast.
+- In Round 3 repeat `CONFIDENCE`, `RUIN RISK`, and `DOOR` from the updated position: upstream scoring needs these final-round values, although its abbreviated Round 3 prompt omits them.
+- Upstream source and pinned revision are in `references/upstream.json`. Before an update preserve local changes and user-created seats; do not overwrite this integration blindly.
 
 ## What this does
 
@@ -122,7 +135,7 @@ Quick mode skips this round when the Round 2 spread on the top option is 3 or le
 3. Edit `roster.json` in place: only the `"board"` and `"default"` fields. Keep the default board between one and nine seats, using keys that exist in `"seats"`. Never remove a seat from `"seats"` here; taking someone off the default board keeps them available for `--seats` and `ask`.
 4. Confirm the new board in one line. The room picks it up on its next page load.
 
-To add a brand new advisor, use `/newroaster`.
+To add a brand new advisor, read `.claude/skills/newroaster/SKILL.md` from the repo root and follow it (or invoke `/newroaster` when registered).
 
 ## Without sub-agents (Codex or a runtime that cannot spawn agents)
 
