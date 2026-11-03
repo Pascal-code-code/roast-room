@@ -34,8 +34,10 @@ Danach Claude Code einmal neu starten, damit es die Berater kennt.
 ```
 Ich überlege, [DEINE IDEE ODER ENTSCHEIDUNG].
 Bevor du den Roast Room startest, interview mich kurz: höchstens fünf
-Fragen, eine nach der anderen. Was du aus diesem Projekt schon über mich
-und mein Angebot weißt, fragst du nicht nochmal.
+Fragen, eine nach der anderen, und warte jeweils auf meine Antwort.
+Überspring das Interview nicht und setz keine Zahlen als Annahme.
+Was du aus diesem Projekt schon über mich und mein Angebot weißt,
+fragst du nicht nochmal.
 Danach: Starte den Roast Room im Hintergrund, öffne
 http://localhost:4730 im Browser und starte /roast-room --quick mit dem Brief.
 Am Ende will ich eine klare Entscheidung: machen, nicht machen oder
